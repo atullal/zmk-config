@@ -9,6 +9,11 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
 
+/* Corne v3 has 6 underglow + 21 per-key LEDs = 27 per side */
+&led_strip {
+    chain-length = <27>;
+};
+
 / {
     keymap {
         compatible = "zmk,keymap";
@@ -44,14 +49,14 @@
         raise_layer {
             // -----------------------------------------------------------------------------------------
             // | TAB  |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            // | CTRL | BRI+| BRI-| EFF+| EFF-| TOG |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT | HUE+| HUE-| SAT+| SAT-| SPD+|   |  _  |  +  |  {  |  }  | "|" |  ~   |
             //                    | GUI |     | SPC |   | ENT |     | ALT |
             bindings = <
-                &kp TAB   &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-                &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-                &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                                          &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
+                &kp TAB   &kp EXCL          &kp AT            &kp HASH          &kp DLLR          &kp PRCNT            &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
+                &kp LCTRL &rgb_ug RGB_BRI   &rgb_ug RGB_BRD   &rgb_ug RGB_EFF   &rgb_ug RGB_EFR   &rgb_ug RGB_TOG      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
+                &kp LSHFT &rgb_ug RGB_HUI   &rgb_ug RGB_HUD   &rgb_ug RGB_SAI   &rgb_ug RGB_SAD   &rgb_ug RGB_SPI      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
+                                                               &kp LGUI          &trans            &kp SPACE            &kp RET   &trans    &kp RALT
             >;
         };
     };
